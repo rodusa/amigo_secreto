@@ -1,13 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
     <title>Amigo Secreto</title>
+    <script defer>
+        function sortearAmigo() {
+            // Obtém o elemento listaAmigos
+            const listaAmigos = document.getElementById("listaAmigos");
+
+            // Verifica se há amigos adicionados
+            if (!listaAmigos || listaAmigos.children.length === 0) {
+                alert("Nenhum amigo na lista para sortear!");
+                return;
+            }
+
+            // Converte os itens da lista em um array para selecionar um aleatoriamente
+            const amigosList = Array.from(listaAmigos.children);
+            const randomIndex = Math.floor(Math.random() * amigosList.length);
+            const sorteado = amigosList[randomIndex].textContent;
+
+            // Exibe o amigo selecionado na lista de resultados
+            const resultadoList = document.getElementById("resultado");
+            resultadoList.innerHTML = ""; // Limpa qualquer resultado anterior
+
+            const newItem = document.createElement("li");
+            newItem.textContent = `Amigo sorteado: ${sorteado}`;
+            resultadoList.appendChild(newItem);
+        }
+
+        function adicionarAmigo() {
+            // Faz referência corretamente ao campo de entrada
+            let amigoInput = document.getElementById("amigo");
+
+            if (!amigoInput) {
+                console.error("Elemento com id 'amigo' não encontrado.");
+                return;
+            }
+
+            let amigoName = amigoInput.value.trim(); // Remove espaços no início e no final
+
+            // Garante que a entrada não está vazia
+            if (amigoName) {
+                // Cria um novo item de lista para o listaAmigos
+                let listaAmigos = document.getElementById("listaAmigos");
+
+                if (!listaAmigos) {
+                    console.error("Elemento com id 'listaAmigos' não encontrado.");
+                    return;
+                }
+
+                let newItem = document.createElement("li");
+                newItem.textContent = amigoName;
+
+                // Adiciona o novo item à listaAmigos
+                listaAmigos.appendChild(newItem);
+
+                // Limpa o campo de entrada
+                amigoInput.value = "";
+            } else {
+                alert("Por favor, insira o nome de um amigo.");
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -16,14 +78,14 @@
             <h1 class="main-title">Amigo Secreto</h1>
             <img src="assets/amigo-secreto.png" alt="Imagem representativa de amigo secreto">
         </header>
-        
+
         <section class="input-section">
             <h2 class="section-title">Digite o nome dos seus amigos</h2>
             <div class="input-wrapper">
                 <input type="text" id="amigo" class="input-name" placeholder="Digite um nome">
                 <button class="button-add" onclick="adicionarAmigo()">Adicionar</button>
             </div>
-           
+
             <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
             <ul id="resultado" class="result-list" aria-live="polite"></ul>
 
@@ -35,7 +97,6 @@
             </div>
         </section>
     </main>
-
-    <script src="app.js" defer></script>
 </body>
+
 </html>
