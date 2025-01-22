@@ -1,3 +1,3 @@
 # amigosecreto
 
-Sortear Amigo Secreto abc xyz
+Sortear Amigo Secreto abc xyz REMOTE
