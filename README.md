@@ -1,3 +1,3 @@
 # amigosecreto
 
-Sortear Amigo Secretoa
+Sortear Amigo Secreto abc xyz
